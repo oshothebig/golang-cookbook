@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"unicode/utf8"
 )
 
 func main() {
-	text := "abcdefg"
+	text := "abcdefg 456789"
+	fmt.Println(text)
 	fmt.Println(reverseString1(text))
 	fmt.Println(reverseString2(text))
+	fmt.Println(reverseWord(text))
 }
 
 func reverseString1(s string) string {
@@ -30,4 +33,16 @@ func reverseString2(s string) string {
 	}
 
 	return string(reversed)
+}
+
+func reverseWord(s string) string {
+	words := strings.Split(s, " ")
+	reversed := make([]string, len(words))
+	copy(reversed, words)
+
+	for i, j := 0, len(reversed)-1; i < j; i, j = i+1, j-1 {
+		reversed[i], reversed[j] = reversed[j], reversed[i]
+	}
+
+	return strings.Join(reversed, " ")
 }
